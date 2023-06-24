@@ -1,0 +1,6 @@
+src/**/.vscode
+src/**/bin
+src/**/obj
+src/**/Makefile
+
+src/TerminalGuiClient/appsettings.json
