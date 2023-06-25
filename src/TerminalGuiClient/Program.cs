@@ -3,6 +3,7 @@ using System.Timers;
 using Microsoft.Extensions.Configuration;
 using SenseHatLib.Helpers;
 using SenseHatLib.Models;
+using SenseHatLib.Services;
 using Terminal.Gui;
 
 internal class Program
@@ -26,6 +27,7 @@ public sealed class Settings
 public class ExampleWindow : Window
 {
 	private Settings settings;
+	private SenseHatClient senseHatClient;
 	private System.Timers.Timer servicePollTimer;
 	private Label temperatureLabel, temperatureValue;
 	private Label humidityLabel, humidityValue;
@@ -44,6 +46,7 @@ public class ExampleWindow : Window
 			.Build();
 
 		settings = config.GetRequiredSection("Settings").Get<Settings>();
+		senseHatClient = new SenseHatClient(settings.ServiceUrlPrefix, settings.ServiceIpAddress, settings.ServicePort);
 
 		servicePollTimer = new System.Timers.Timer(settings.PollingIntervalInSeconds * 1000);
 
@@ -169,12 +172,12 @@ public class ExampleWindow : Window
 
 		btnSetLedWhite.Clicked += () =>
 		{
-			statusValue.Text = SetLed(true);
+			statusValue.Text = senseHatClient.SetLed(true);
 		};
 
 		btnSetLedMulti.Clicked += () =>
 		{
-			statusValue.Text = SetLed(false);
+			statusValue.Text = senseHatClient.SetLed(false);
 		};
 
 		Add(
@@ -192,57 +195,12 @@ public class ExampleWindow : Window
 
 	private void UpdateSensorDisplay()
 	{
-		var result = GetSensorData((unitsCombo.SelectedItem == 1) ? MeasurementUnits.Imperial : MeasurementUnits.Metric);
+		var result = senseHatClient.GetSensorData((unitsCombo.SelectedItem == 1) ? MeasurementUnits.Imperial : MeasurementUnits.Metric);
 
 		temperatureValue.Text = $"{result.Data.Temperature.ToString()}\u00B0 {result.Data.TemperatureUnits}";
 		humidityValue.Text = $"{result.Data.Humidity.ToString()}%";
 		altitudeValue.Text = $"{result.Data.Altitude.ToString()} {result.Data.AltitudeUnits}";
 
 		statusValue.Text = $"[{DateTime.Now.ToString("h:mm:ss tt")}] {((string.IsNullOrEmpty(result.Status.ErrorMessage)) ? "Success" : result.Status.ErrorMessage)}";
-	}
-
-	private SensorResult GetSensorData(MeasurementUnits measurementUnits = MeasurementUnits.Metric)
-	{
-		try
-		{
-			using HttpClient client = new();
-			var task1 = Task.Run(() => client.GetStringAsync($"{settings.ServiceUrlPrefix}://{settings.ServiceIpAddress}:{settings.ServicePort.ToString()}/Sensor/SensorData?measurementUnits={measurementUnits}"));
-			task1.Wait();
-			var response = task1.Result;
-
-			var sensorResult = JsonSerializer.Deserialize<SensorResult>(response, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-
-			return sensorResult;
-
-		}
-		catch (System.Exception ex)
-		{
-			var sensorResult = new SensorResult();
-
-			sensorResult.Status.ErrorMessage = ex.Message;
-			sensorResult.Status.IsSynthetic = false;
-			sensorResult.Status.IsValid = false;
-
-			return sensorResult;
-		}
-	}
-
-	private string SetLed(bool clear = false)
-	{
-		try
-		{
-			using HttpClient client = new();
-
-			var clearDisplayValue = (clear) ? "true" : "false";
-			var task1 = Task.Run(() => client.PutAsync($"{settings.ServiceUrlPrefix}://{settings.ServiceIpAddress}:{settings.ServicePort.ToString()}/Sensor/RefreshLed?clearDisplay={clear}", null));
-			task1.Wait();
-			var response = task1.Result;
-
-			return "Success";
-		}
-		catch (System.Exception ex)
-		{
-			return ex.Message;
-		}
 	}
 }
