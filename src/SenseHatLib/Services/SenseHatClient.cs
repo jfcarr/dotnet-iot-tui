@@ -4,6 +4,9 @@ using SenseHatLib.Models;
 
 namespace SenseHatLib.Services
 {
+	/// <summary>
+	/// Manages communication with the Sense HAT.
+	/// </summary>
 	public class SenseHatClient
 	{
 		private string _serviceUrlPrefix;
@@ -17,6 +20,10 @@ namespace SenseHatLib.Services
 			_servicePort = servicePort;
 		}
 
+		/// <summary>
+		/// Retrieve current sensor data.
+		/// </summary>
+		/// <param name="measurementUnits"></param>
 		public SensorResult GetSensorData(MeasurementUnits measurementUnits = MeasurementUnits.Metric)
 		{
 			try
@@ -43,6 +50,10 @@ namespace SenseHatLib.Services
 			}
 		}
 
+		/// <summary>
+		/// Manipulate the LED pad.
+		/// </summary>
+		/// <param name="clear"></param>
 		public string SetLed(bool clear = false)
 		{
 			try

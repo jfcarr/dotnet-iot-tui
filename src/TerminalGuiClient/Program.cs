@@ -16,6 +16,9 @@ internal class Program
 	}
 }
 
+/// <summary>
+/// Holds settings retrieved from appsettings.json
+/// </summary>
 public sealed class Settings
 {
 	public required string ServiceUrlPrefix { get; set; }
@@ -24,6 +27,9 @@ public sealed class Settings
 	public required int PollingIntervalInSeconds { get; set; }
 }
 
+/// <summary>
+/// Terminal.Gui handler
+/// </summary>
 public class ExampleWindow : Window
 {
 	private Settings settings;
@@ -38,6 +44,9 @@ public class ExampleWindow : Window
 	private ComboBox unitsCombo;
 	private Button btnGetSensorData, btnSetLedWhite, btnSetLedMulti;
 
+	/// <summary>
+	/// Initialize the Terminal.Gui application.
+	/// </summary>
 	public ExampleWindow()
 	{
 		IConfiguration config = new ConfigurationBuilder()
@@ -193,6 +202,9 @@ public class ExampleWindow : Window
 		btnGetSensorData.SetFocus();
 	}
 
+	/// <summary>
+	/// Populate the UI elements with sensor data.
+	/// </summary>
 	private void UpdateSensorDisplay()
 	{
 		var result = senseHatClient.GetSensorData((unitsCombo.SelectedItem == 1) ? MeasurementUnits.Imperial : MeasurementUnits.Metric);

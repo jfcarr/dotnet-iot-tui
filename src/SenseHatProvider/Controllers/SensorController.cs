@@ -16,12 +16,21 @@ public class SensorController : ControllerBase
 		_logger = logger;
 	}
 
+	/// <summary>
+	/// Return a boolean indicating that the service is accepting requests, and the Sense HAT can be initialized.
+	/// </summary>
 	[HttpGet("Heartbeat")]
 	public bool GetHeartbeat()
 	{
-		return true;
+		var sensorManager = new SensorManager();
+
+		return sensorManager.InitSenseHat();
 	}
 
+	/// <summary>
+	/// Retrieve sensor data.
+	/// </summary>
+	/// <param name="measurementUnits"></param>
 	[HttpGet("SensorData")]
 	public SensorResult GetSensorData(MeasurementUnits measurementUnits = MeasurementUnits.Metric)
 	{
@@ -32,6 +41,10 @@ public class SensorController : ControllerBase
 		return sensorData;
 	}
 
+	/// <summary>
+	/// Manipulate LED pad.
+	/// </summary>
+	/// <param name="clearDisplay"></param>
 	[HttpPut("RefreshLed")]
 	public string RefreshLed(bool clearDisplay = true)
 	{

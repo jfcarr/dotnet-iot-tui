@@ -8,6 +8,27 @@ namespace SenseHatProvider.Services
 {
 	public class SensorManager
 	{
+		/// <summary>
+		/// Return a boolean indicating that the Sense HAT can be initialized.
+		/// </summary>
+		public bool InitSenseHat()
+		{
+			try
+			{
+				using SenseHat sh = new SenseHat();
+
+				return true;
+			}
+			catch (System.Exception)
+			{
+				return false;
+			}
+
+		}
+
+		/// <summary>
+		/// Initialize the SenseHat (IoT) library, and retrieve sensor data.
+		/// </summary>
 		public SensorResult GetCurrentSensorData(MeasurementUnits measurementUnits = MeasurementUnits.Metric)
 		{
 			var sensorResult = new SensorResult();
@@ -64,6 +85,9 @@ namespace SenseHatProvider.Services
 			return sensorResult;
 		}
 
+		/// <summary>
+		/// Initialize the SenseHat (IoT) library, and update the LED pad.
+		/// </summary>
 		public string RefreshLed(bool clearDisplay)
 		{
 			try

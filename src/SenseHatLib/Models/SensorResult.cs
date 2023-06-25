@@ -1,5 +1,8 @@
 namespace SenseHatLib.Models
 {
+	/// <summary>
+	/// Holds sensor data and status information.
+	/// </summary>
 	public class SensorResult
 	{
 		public SensorResult()
@@ -12,6 +15,9 @@ namespace SenseHatLib.Models
 		public SensorStatus Status { get; set; }
 	}
 
+	/// <summary>
+	/// Holds sensor data.
+	/// </summary>
 	public class SensorData
 	{
 		public int Altitude { get; set; }
@@ -23,10 +29,24 @@ namespace SenseHatLib.Models
 		public string TemperatureUnits { get; set; }
 	}
 
+	/// <summary>
+	/// Holds status information.
+	/// </summary>
 	public class SensorStatus
 	{
+		/// <summary>
+		/// Was the current data successfully retrieved from the Sense HAT?
+		/// </summary>
 		public bool IsValid { get; set; }
+
+		/// <summary>
+		/// Is the current data generated sample data, or is it from the actual Sense HAT?
+		/// </summary>
 		public bool IsSynthetic { get; set; }
+
+		/// <summary>
+		/// Latest error message, if applicable.
+		/// </summary>
 		public string ErrorMessage { get; set; }
 	}
 }
