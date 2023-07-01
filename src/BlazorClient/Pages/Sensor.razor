@@ -1,0 +1,17 @@
+﻿@page "/sensor"
+
+<PageTitle>Sensor</PageTitle>
+
+<h1>Sensor</h1>
+
+<p>Current temperature: @currentTemperature</p>
+<p>Current humidity: @currentHumidity</p>
+<p>Current altitude: @currentAltitude</p>
+
+<p>
+	<button class="btn btn-primary" @onclick="GetSensorData">Get Sensor Data</button>
+	<button class="btn btn-primary" @onclick="() => SetLed(true)">Set LED White</button>
+	<button class="btn btn-primary" @onclick="() => SetLed(false)">Set LED Multi</button>
+</p>
+
+<p>Status: @statusMessage</p>
