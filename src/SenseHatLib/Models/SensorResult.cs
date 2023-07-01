@@ -22,11 +22,32 @@ namespace SenseHatLib.Models
 	{
 		public int Altitude { get; set; }
 		public string AltitudeUnits { get; set; }
+		public string FormattedAltitude
+		{
+			get
+			{
+				return $"{Altitude} {AltitudeUnits}";
+			}
+		}
 
 		public int Humidity { get; set; }
+		public string FormattedHumidity
+		{
+			get
+			{
+				return $"{Humidity}%";
+			}
+		}
 
 		public int Temperature { get; set; }
 		public string TemperatureUnits { get; set; }
+		public string FormattedTemperature
+		{
+			get
+			{
+				return $"{Temperature}\u00B0 {TemperatureUnits}";
+			}
+		}
 	}
 
 	/// <summary>

@@ -209,9 +209,9 @@ public class ExampleWindow : Window
 	{
 		var result = senseHatClient.GetSensorData((unitsCombo.SelectedItem == 1) ? MeasurementUnits.Imperial : MeasurementUnits.Metric);
 
-		temperatureValue.Text = $"{result.Data.Temperature.ToString()}\u00B0 {result.Data.TemperatureUnits}";
-		humidityValue.Text = $"{result.Data.Humidity.ToString()}%";
-		altitudeValue.Text = $"{result.Data.Altitude.ToString()} {result.Data.AltitudeUnits}";
+		temperatureValue.Text = result.Data.FormattedTemperature;
+		humidityValue.Text = result.Data.FormattedHumidity;
+		altitudeValue.Text = result.Data.FormattedAltitude;
 
 		statusValue.Text = $"[{DateTime.Now.ToString("h:mm:ss tt")}] {((string.IsNullOrEmpty(result.Status.ErrorMessage)) ? "Success" : result.Status.ErrorMessage)}";
 	}
