@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "SenseHatLib"
+		},
+		{
+			"path": "BlazorClient"
+		}
+	]
+}
