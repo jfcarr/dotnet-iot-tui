@@ -3,4 +3,5 @@ src/**/bin
 src/**/obj
 src/**/Makefile
 
+src/BlazorClient/appsettings.json
 src/TerminalGuiClient/appsettings.json
