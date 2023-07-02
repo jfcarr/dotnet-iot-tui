@@ -85,35 +85,42 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		var senseHatClient = new SenseHatClient(appSettings.ServiceUrlPrefix, appSettings.ServiceIpAddress, appSettings.ServicePort);
 		var results = senseHatClient.GetSensorData(SenseHatLib.Helpers.MeasurementUnits.Imperial);
 
-		var table = new Table();
-		table.AddColumn("Sensor Data Type");
-		table.AddColumn("Value");
-
-		switch (commandType)
+		if (results.Status.IsValid)
 		{
-			case "temperature":
-				table.AddRow(commandType, results.Data.FormattedTemperature);
-				break;
+			var table = new Table();
+			table.AddColumn("Sensor Data Type");
+			table.AddColumn("Value");
 
-			case "humidity":
-				table.AddRow(commandType, results.Data.FormattedHumidity);
-				break;
+			switch (commandType)
+			{
+				case "temperature":
+					table.AddRow(commandType, results.Data.FormattedTemperature);
+					break;
 
-			case "altitude":
-				table.AddRow(commandType, results.Data.FormattedAltitude);
-				break;
+				case "humidity":
+					table.AddRow(commandType, results.Data.FormattedHumidity);
+					break;
 
-			case "all":
-				table.AddRow("altitude", results.Data.FormattedAltitude);
-				table.AddRow("humidity", results.Data.FormattedHumidity);
-				table.AddRow("temperature", results.Data.FormattedTemperature);
-				break;
+				case "altitude":
+					table.AddRow(commandType, results.Data.FormattedAltitude);
+					break;
 
-			default:
-				break;
+				case "all":
+					table.AddRow("altitude", results.Data.FormattedAltitude);
+					table.AddRow("humidity", results.Data.FormattedHumidity);
+					table.AddRow("temperature", results.Data.FormattedTemperature);
+					break;
+
+				default:
+					break;
+			}
+
+			AnsiConsole.Write(table);
 		}
-
-		AnsiConsole.Write(table);
+		else
+		{
+			AnsiConsole.MarkupLineInterpolated($"[red]{results.Status.ErrorMessage}[/]");
+		}
 	}
 
 	private void ExecActionSend(string commandType, AppSettings appSettings)
@@ -137,6 +144,6 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		if (result == "Success")
 			AnsiConsole.MarkupLineInterpolated($"[green]{result}[/]");
 		else
-			AnsiConsole.MarkupLineInterpolated($"[red]Error:[/]{result}");
+			AnsiConsole.MarkupLineInterpolated($"[red]{result}[/]");
 	}
 }
