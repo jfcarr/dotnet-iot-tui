@@ -15,17 +15,6 @@ internal class Program
 	}
 }
 
-/// <summary>
-/// Holds settings retrieved from appsettings.json
-/// </summary>
-public sealed class AppSettings
-{
-	public required string ServiceUrlPrefix { get; set; }
-	public required string ServiceIpAddress { get; set; }
-	public required int ServicePort { get; set; }
-	public required int PollingIntervalInSeconds { get; set; }
-}
-
 internal sealed class SensorCommand : Command<SensorCommand.Settings>
 {
 	public sealed class Settings : CommandSettings
@@ -42,12 +31,7 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 
 	public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
 	{
-		IConfiguration config = new ConfigurationBuilder()
-			.AddJsonFile("appsettings.json")
-			.AddEnvironmentVariables()
-			.Build();
-
-		var appSettings = config.GetRequiredSection("Settings").Get<AppSettings>();
+		var serviceSettings = new ServiceSettings();
 
 		if (settings.Action.ToLower() == "retrieve")
 		{
@@ -55,7 +39,7 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 
 			if (Array.IndexOf(validCommandTypes, settings.CommandType.ToLower()) >= 0)
 			{
-				ExecActionRetrieve(settings.CommandType.ToLower(), appSettings);
+				ExecActionRetrieve(settings.CommandType.ToLower(), serviceSettings);
 			}
 			else
 			{
@@ -69,7 +53,7 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 
 			if (Array.IndexOf(validCommandTypes, settings.CommandType.ToLower()) >= 0)
 			{
-				ExecActionSend(settings.CommandType.ToLower(), appSettings);
+				ExecActionSend(settings.CommandType.ToLower(), serviceSettings);
 			}
 			else
 			{
@@ -80,9 +64,9 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		return 0;
 	}
 
-	private void ExecActionRetrieve(string commandType, AppSettings appSettings)
+	private void ExecActionRetrieve(string commandType, ServiceSettings serviceSettings)
 	{
-		var senseHatClient = new SenseHatClient(appSettings.ServiceUrlPrefix, appSettings.ServiceIpAddress, appSettings.ServicePort);
+		var senseHatClient = new SenseHatClient(serviceSettings.UrlPrefix, serviceSettings.IpAddress, serviceSettings.Port);
 		var results = senseHatClient.GetSensorData(SenseHatLib.Helpers.MeasurementUnits.Imperial);
 
 		if (results.Status.IsValid)
@@ -123,9 +107,9 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		}
 	}
 
-	private void ExecActionSend(string commandType, AppSettings appSettings)
+	private void ExecActionSend(string commandType, ServiceSettings serviceSettings)
 	{
-		var senseHatClient = new SenseHatClient(appSettings.ServiceUrlPrefix, appSettings.ServiceIpAddress, appSettings.ServicePort);
+		var senseHatClient = new SenseHatClient(serviceSettings.UrlPrefix, serviceSettings.IpAddress, serviceSettings.Port);
 
 		var result = string.Empty;
 		switch (commandType)

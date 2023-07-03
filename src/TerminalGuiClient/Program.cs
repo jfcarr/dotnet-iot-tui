@@ -17,22 +17,10 @@ internal class Program
 }
 
 /// <summary>
-/// Holds settings retrieved from appsettings.json
-/// </summary>
-public sealed class Settings
-{
-	public required string ServiceUrlPrefix { get; set; }
-	public required string ServiceIpAddress { get; set; }
-	public required int ServicePort { get; set; }
-	public required int PollingIntervalInSeconds { get; set; }
-}
-
-/// <summary>
 /// Terminal.Gui handler
 /// </summary>
 public class ExampleWindow : Window
 {
-	private Settings settings;
 	private SenseHatClient senseHatClient;
 	private System.Timers.Timer servicePollTimer;
 	private Label temperatureLabel, temperatureValue;
@@ -49,15 +37,11 @@ public class ExampleWindow : Window
 	/// </summary>
 	public ExampleWindow()
 	{
-		IConfiguration config = new ConfigurationBuilder()
-			.AddJsonFile("appsettings.json")
-			.AddEnvironmentVariables()
-			.Build();
+		var serviceSettings = new ServiceSettings();
 
-		settings = config.GetRequiredSection("Settings").Get<Settings>();
-		senseHatClient = new SenseHatClient(settings.ServiceUrlPrefix, settings.ServiceIpAddress, settings.ServicePort);
+		senseHatClient = new SenseHatClient(serviceSettings.UrlPrefix, serviceSettings.IpAddress, serviceSettings.Port);
 
-		servicePollTimer = new System.Timers.Timer(settings.PollingIntervalInSeconds * 1000);
+		servicePollTimer = new System.Timers.Timer(serviceSettings.PollingIntervalInSeconds * 1000);
 
 		Title = "Sensor Dashboard (Ctrl+Q to quit)";
 

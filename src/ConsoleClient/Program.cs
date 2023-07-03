@@ -1,22 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using SenseHatLib.Models;
+﻿using SenseHatLib.Models;
 using SenseHatLib.Services;
 
 internal class Program
 {
 	private static void Main(string[] args)
 	{
-		IConfiguration config = new ConfigurationBuilder()
-			.AddJsonFile("appsettings.json")
-			.AddEnvironmentVariables()
-			.Build();
+		var serviceSettings = new ServiceSettings();
 
 		if (args.Length == 1)
 		{
 			var myService = new SenseHatClient(
-				config.GetValue<string>("Settings:ServiceUrlPrefix"),
-				config.GetValue<string>("Settings:ServiceIpAddress"),
-				config.GetValue<int>("Settings:ServicePort")
+				serviceSettings.UrlPrefix,
+				serviceSettings.IpAddress,
+				serviceSettings.Port
 			);
 
 			SensorResult results;
