@@ -11,11 +11,13 @@ internal class Program
 			.AddEnvironmentVariables()
 			.Build();
 
-		var appSettings = config.GetRequiredSection("Settings").Get<AppSettings>();
-
 		if (args.Length == 1)
 		{
-			var myService = new SenseHatClient(appSettings.ServiceUrlPrefix, appSettings.ServiceIpAddress, appSettings.ServicePort);
+			var myService = new SenseHatClient(
+				config.GetValue<string>("Settings:ServiceUrlPrefix"),
+				config.GetValue<string>("Settings:ServiceIpAddress"),
+				config.GetValue<int>("Settings:ServicePort")
+			);
 
 			SensorResult results;
 
@@ -59,15 +61,4 @@ internal class Program
 	{
 		Console.WriteLine("Not sure what you want to do.  You can use any of these arguments: 'temperature', 'humidity', 'altitude', 'led-multi', or 'led-white'");
 	}
-}
-
-/// <summary>
-/// Holds settings retrieved from appsettings.json
-/// </summary>
-public sealed class AppSettings
-{
-	public required string ServiceUrlPrefix { get; set; }
-	public required string ServiceIpAddress { get; set; }
-	public required int ServicePort { get; set; }
-	public required int PollingIntervalInSeconds { get; set; }
 }
