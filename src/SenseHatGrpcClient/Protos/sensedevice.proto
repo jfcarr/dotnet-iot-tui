@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "SenseHatGrpcClient";
+
+package sensedevice;
+
+service SenseHatConnector {
+  rpc GetSensorData(SensorDataRequest) returns (SensorDataReply);
+}
+
+message SensorDataRequest { int32 measurementUnits = 1; };
+
+message SensorDataReply {
+  int32 altitude = 1;
+  string altitudeUnits = 2;
+  string formattedAltitude = 3;
+  int32 humidity = 4;
+  string formattedHumidity = 5;
+  int32 temperature = 6;
+  string temperatureUnits = 7;
+  string formattedTemperature = 8;
+  bool isValid = 9;
+  bool isSynthetic = 10;
+  string errorMessage = 11;
+};
