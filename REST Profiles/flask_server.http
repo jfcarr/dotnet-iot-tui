@@ -1,0 +1,20 @@
+@hostname = 192.168.0.xxx
+@port = 5191
+
+# Sensor data - Metric units
+GET http://{{hostname}}:{{port}}/Sensor/SensorData/1 HTTP/1.1
+
+###
+
+# Sensor data - Imperial units
+GET http://{{hostname}}:{{port}}/Sensor/SensorData/2 HTTP/1.1
+
+###
+
+# Clear (white)
+PUT http://{{hostname}}:{{port}}/Sensor/RefreshLed/1 HTTP/1.1
+
+###
+
+# Set (red)
+PUT http://{{hostname}}:{{port}}/Sensor/RefreshLed/0 HTTP/1.1
