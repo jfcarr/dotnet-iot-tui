@@ -94,17 +94,7 @@ namespace SenseHatProvider.Services
 			{
 				using (SenseHat sh = new SenseHat())
 				{
-					if (clearDisplay)
-					{
-						sh.LedMatrix.Fill(Color.White);
-					}
-					else
-					{
-						sh.LedMatrix.Fill(Color.Purple);
-						sh.LedMatrix.SetPixel(0, 0, Color.Red);
-						sh.LedMatrix.SetPixel(1, 0, Color.Green);
-						sh.LedMatrix.SetPixel(2, 0, Color.Blue);
-					}
+					sh.LedMatrix.Fill((clearDisplay) ? Color.White : Color.Red);
 				}
 
 				return "OK";
