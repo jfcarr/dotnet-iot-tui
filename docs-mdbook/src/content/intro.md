@@ -12,6 +12,7 @@
   * Console application + 3rd-party Nuget libraries
     * Terminal.GUI
     * Spectre.Console
+* Python/Flask
 
 # Environment and Tools
 

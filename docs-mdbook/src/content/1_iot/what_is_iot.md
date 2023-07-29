@@ -20,8 +20,10 @@ The .NET IoT libraries provide support for direct GPIO programming, and also [de
 
 The libraries require at least ARM v7, meaning they will _not_ work on SBCs like the Raspberry Pi Zero.  They support SBC hardware, not microcontrollers: If you are interested in microcontroller programming in .NET, check out [.NET nanoFramework](https://www.nanoframework.net/).
 
-# Links
+# References
 
-* [https://aws.amazon.com/what-is/iot/](https://aws.amazon.com/what-is/iot/)
-* [https://en.wikipedia.org/wiki/Microcontroller](https://en.wikipedia.org/wiki/Microcontroller)
-* [https://dotnet.microsoft.com/en-us/apps/iot](https://dotnet.microsoft.com/en-us/apps/iot)
+Description | Link
+---------|----------
+ What is IoT (Internet of Things)? - Everything you need to know - AWS | <https://aws.amazon.com/what-is/iot/>
+ Microcontroller - Wikipedia | <https://en.wikipedia.org/wiki/Microcontroller>
+ .NET Internet of Things (IoT) applications | <https://dotnet.microsoft.com/en-us/apps/iot>
