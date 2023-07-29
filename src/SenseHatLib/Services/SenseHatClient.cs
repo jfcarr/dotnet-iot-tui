@@ -29,7 +29,7 @@ namespace SenseHatLib.Services
 			try
 			{
 				using HttpClient client = new();
-				var task1 = Task.Run(() => client.GetStringAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/SensorData?measurementUnits={measurementUnits}"));
+				var task1 = Task.Run(() => client.GetStringAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/SensorData/{measurementUnits}"));
 				task1.Wait();
 				var response = task1.Result;
 
@@ -61,7 +61,7 @@ namespace SenseHatLib.Services
 				using HttpClient client = new();
 
 				var clearDisplayValue = (clear) ? "true" : "false";
-				var task1 = Task.Run(() => client.PutAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/RefreshLed?clearDisplay={clear}", null));
+				var task1 = Task.Run(() => client.PutAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/RefreshLed/{clear}", null));
 				task1.Wait();
 				var response = task1.Result;
 

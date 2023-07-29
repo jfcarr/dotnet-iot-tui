@@ -31,8 +31,8 @@ public class SensorController : ControllerBase
 	/// Retrieve sensor data.
 	/// </summary>
 	/// <param name="measurementUnits"></param>
-	[HttpGet("SensorData")]
-	public SensorResult GetSensorData(MeasurementUnits measurementUnits = MeasurementUnits.Metric)
+	[HttpGet("SensorData/{measurementUnits}")]
+	public SensorResult GetSensorData(MeasurementUnits measurementUnits)
 	{
 		var sensorManager = new SensorManager();
 
@@ -45,8 +45,8 @@ public class SensorController : ControllerBase
 	/// Manipulate LED pad.
 	/// </summary>
 	/// <param name="clearDisplay"></param>
-	[HttpPut("RefreshLed")]
-	public string RefreshLed(bool clearDisplay = true)
+	[HttpPut("RefreshLed/{clearDisplay}")]
+	public string RefreshLed(bool clearDisplay)
 	{
 		var sensorManager = new SensorManager();
 
