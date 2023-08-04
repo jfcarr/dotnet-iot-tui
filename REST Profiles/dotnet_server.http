@@ -11,10 +11,8 @@ GET http://{{hostname}}:{{port}}/Sensor/SensorData/2 HTTP/1.1
 
 ###
 
-# Clear (white)
-PUT http://{{hostname}}:{{port}}/Sensor/RefreshLed/true HTTP/1.1
+PUT http://{{hostname}}:{{port}}/Sensor/SetLedWhite HTTP/1.1
 
 ###
 
-# Set (red)
-PUT http://{{hostname}}:{{port}}/Sensor/RefreshLed/false HTTP/1.1
+PUT http://{{hostname}}:{{port}}/Sensor/SetLedRed HTTP/1.1

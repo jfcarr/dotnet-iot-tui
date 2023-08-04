@@ -1,4 +1,5 @@
 ﻿using SenseHatLib.Models;
+using System.Drawing;
 using SenseHatLib.Services;
 
 internal class Program
@@ -35,11 +36,13 @@ internal class Program
 					break;
 
 				case "led-white":
-					myService.SetLed(true);
+					var result1 = myService.SetLed(Color.White);
+					Console.WriteLine(result1);
 					break;
 
-				case "led-multi":
-					myService.SetLed(false);
+				case "led-red":
+					var result2 = myService.SetLed(Color.Red);
+					Console.WriteLine(result2);
 					break;
 
 				default:
@@ -55,6 +58,6 @@ internal class Program
 
 	private static void ShowHelpMessage()
 	{
-		Console.WriteLine("Not sure what you want to do.  You can use any of these arguments: 'temperature', 'humidity', 'altitude', 'led-multi', or 'led-white'");
+		Console.WriteLine("Not sure what you want to do.  You can use any of these arguments: 'temperature', 'humidity', 'altitude', 'led-red', or 'led-white'");
 	}
 }

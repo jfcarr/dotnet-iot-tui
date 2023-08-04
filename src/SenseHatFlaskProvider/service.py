@@ -49,12 +49,24 @@ def get_current_sensor_data(measurement_units):
     return sensor_result.to_json()
 
 
-@app.put("/Sensor/RefreshLed/<int:clear_display>")
-def refresh_led(clear_display):
+@app.put("/Sensor/SetLedWhite")
+def set_led_white():
+    set_led([255, 255, 255])
+
+    return "Success!"
+
+
+@app.put("/Sensor/SetLedRed")
+def set_led_red():
+    set_led([255, 0, 0])
+
+    return "Success!"
+
+
+def set_led(rgb):
     sense = SenseHat()
 
-    # white (true), red (false)
-    O = [255, 255, 255] if clear_display == 1 else [255, 0, 0]
+    O = rgb
 
     led_grid = [
         O, O, O, O, O, O, O, O,
@@ -68,8 +80,6 @@ def refresh_led(clear_display):
     ]
 
     sense.set_pixels(led_grid)
-
-    return "Success!"
 
 
 class my_utils:

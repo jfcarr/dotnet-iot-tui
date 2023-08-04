@@ -1,3 +1,4 @@
+using System.Drawing;
 using Microsoft.AspNetCore.Mvc;
 using SenseHatLib.Helpers;
 using SenseHatLib.Models;
@@ -41,16 +42,22 @@ public class SensorController : ControllerBase
 		return sensorData;
 	}
 
-	/// <summary>
-	/// Manipulate LED pad.
-	/// </summary>
-	/// <param name="clearDisplay"></param>
-	[HttpPut("RefreshLed/{clearDisplay}")]
-	public string RefreshLed(bool clearDisplay)
+	[HttpPut("SetLedWhite")]
+	public string SetLedWhite()
 	{
 		var sensorManager = new SensorManager();
 
-		var result = sensorManager.RefreshLed(clearDisplay);
+		var result = sensorManager.SetLed(Color.White);
+
+		return result;
+	}
+
+	[HttpPut("SetLedRed")]
+	public string SetLedRed()
+	{
+		var sensorManager = new SensorManager();
+
+		var result = sensorManager.SetLed(Color.Red);
 
 		return result;
 	}

@@ -1,4 +1,5 @@
 using SenseHatLib.Services;
+using System.Drawing;
 
 namespace BlazorClient.Pages
 {
@@ -41,15 +42,13 @@ namespace BlazorClient.Pages
 			}
 		}
 
-		private void SetLed(bool clearDisplay)
+		private void SetLed(Color color)
 		{
 			try
 			{
 				var senseHatClient = GetSenseHatClient();
 
-				senseHatClient.SetLed(clearDisplay);
-
-				statusMessage = "OK";
+				statusMessage = senseHatClient.SetLed(color);
 			}
 			catch (System.Exception ex)
 			{

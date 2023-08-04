@@ -10,8 +10,8 @@
 
 <p>
 	<button class="btn btn-primary" @onclick="GetSensorData">Get Sensor Data</button>
-	<button class="btn btn-primary" @onclick="() => SetLed(true)">Set LED White</button>
-	<button class="btn btn-primary" @onclick="() => SetLed(false)">Set LED Multi</button>
+	<button class="btn btn-primary" @onclick="() => SetLed(System.Drawing.Color.White)">Set LED White</button>
+	<button class="btn btn-primary" @onclick="() => SetLed(System.Drawing.Color.Red)">Set LED Red</button>
 </p>
 
 <p>Status: @statusMessage</p>

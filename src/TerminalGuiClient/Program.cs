@@ -30,7 +30,7 @@ public class ExampleWindow : Window
 	private CheckBox pollService;
 	private Label unitsLabel;
 	private ComboBox unitsCombo;
-	private Button btnGetSensorData, btnSetLedWhite, btnSetLedMulti;
+	private Button btnGetSensorData, btnSetLedWhite, btnSetLedRed;
 
 	/// <summary>
 	/// Initialize the Terminal.Gui application.
@@ -141,9 +141,9 @@ public class ExampleWindow : Window
 			IsDefault = false,
 		};
 
-		btnSetLedMulti = new Button()
+		btnSetLedRed = new Button()
 		{
-			Text = "Set LED Multi",
+			Text = "Set LED Red",
 			Y = btnGetSensorData.Y,
 			X = Pos.Right(btnSetLedWhite) + 1,
 			IsDefault = false,
@@ -165,12 +165,12 @@ public class ExampleWindow : Window
 
 		btnSetLedWhite.Clicked += () =>
 		{
-			statusValue.Text = senseHatClient.SetLed(true);
+			statusValue.Text = senseHatClient.SetLed(System.Drawing.Color.White);
 		};
 
-		btnSetLedMulti.Clicked += () =>
+		btnSetLedRed.Clicked += () =>
 		{
-			statusValue.Text = senseHatClient.SetLed(false);
+			statusValue.Text = senseHatClient.SetLed(System.Drawing.Color.Red);
 		};
 
 		Add(
@@ -180,7 +180,7 @@ public class ExampleWindow : Window
 			statusLabel, statusValue,
 			pollService,
 			unitsLabel, unitsCombo,
-			btnGetSensorData, btnSetLedWhite, btnSetLedMulti
+			btnGetSensorData, btnSetLedWhite, btnSetLedRed
 		);
 
 		btnGetSensorData.SetFocus();

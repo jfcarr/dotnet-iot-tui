@@ -85,16 +85,13 @@ namespace SenseHatProvider.Services
 			return sensorResult;
 		}
 
-		/// <summary>
-		/// Initialize the SenseHat (IoT) library, and update the LED pad.
-		/// </summary>
-		public string RefreshLed(bool clearDisplay)
+		public string SetLed(Color color)
 		{
 			try
 			{
 				using (SenseHat sh = new SenseHat())
 				{
-					sh.LedMatrix.Fill((clearDisplay) ? Color.White : Color.Red);
+					sh.LedMatrix.Fill(color);
 				}
 
 				return "OK";

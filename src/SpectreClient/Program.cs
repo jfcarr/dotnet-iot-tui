@@ -23,7 +23,7 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		[CommandArgument(0, "[action]")]
 		public string Action { get; init; }
 
-		[Description("Type of command. If action is 'retrieve', then command type can be 'temperature', 'humidity', 'altitude', or 'all'. For 'send', the type can be 'led-multi' or 'led-white'.")]
+		[Description("Type of command. If action is 'retrieve', then command type can be 'temperature', 'humidity', 'altitude', or 'all'. For 'send', the type can be 'led-red' or 'led-white'.")]
 		[CommandArgument(1, "[command]")]
 		[DefaultValue("Not Specified")]
 		public string CommandType { get; init; }
@@ -49,7 +49,7 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 
 		if (settings.Action.ToLower() == "send")
 		{
-			string[] validCommandTypes = { "led-multi", "led-white" };
+			string[] validCommandTypes = { "led-red", "led-white" };
 
 			if (Array.IndexOf(validCommandTypes, settings.CommandType.ToLower()) >= 0)
 			{
@@ -115,11 +115,11 @@ internal sealed class SensorCommand : Command<SensorCommand.Settings>
 		switch (commandType)
 		{
 			case "led-white":
-				result = senseHatClient.SetLed(true);
+				result = senseHatClient.SetLed(System.Drawing.Color.White);
 				break;
 
-			case "led-multi":
-				result = senseHatClient.SetLed(false);
+			case "led-red":
+				result = senseHatClient.SetLed(System.Drawing.Color.Red);
 				break;
 
 			default:

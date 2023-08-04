@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Drawing;
 using SenseHatLib.Helpers;
 using SenseHatLib.Models;
 
@@ -53,19 +54,30 @@ namespace SenseHatLib.Services
 		/// <summary>
 		/// Manipulate the LED pad.
 		/// </summary>
-		/// <param name="clear"></param>
-		public string SetLed(bool clear = false)
+		/// <param name="color"></param>
+		public string SetLed(Color color)
 		{
 			try
 			{
 				using HttpClient client = new();
 
-				var clearDisplayValue = (clear) ? "true" : "false";
-				var task1 = Task.Run(() => client.PutAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/RefreshLed/{clear}", null));
-				task1.Wait();
-				var response = task1.Result;
+				var endpoint = string.Empty;
 
-				return "Success";
+				if (color == Color.White) endpoint = "SetLedWhite";
+				if (color == Color.Red) endpoint = "SetLedRed";
+
+				if (endpoint != "")
+				{
+					var task1 = Task.Run(() => client.PutAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/{endpoint}", null));
+					task1.Wait();
+					var response = task1.Result;
+
+					return "Success";
+				}
+				else
+				{
+					return "Unsupported color";
+				}
 			}
 			catch (System.Exception ex)
 			{
