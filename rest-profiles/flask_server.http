@@ -1,3 +1,5 @@
+# Update @hostname to match your configuration.
+
 @hostname = 192.168.0.xxx
 @port = 5191
 
