@@ -1,5 +1,5 @@
-using System.Text.Json;
 using System.Drawing;
+using System.Text.Json;
 using SenseHatLib.Helpers;
 using SenseHatLib.Models;
 
@@ -30,7 +30,7 @@ namespace SenseHatLib.Services
 			try
 			{
 				using HttpClient client = new();
-				var task1 = Task.Run(() => client.GetStringAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/SensorData/{measurementUnits}"));
+				var task1 = Task.Run(() => client.GetStringAsync($"{_serviceUrlPrefix}://{_serviceIpAddress}:{_servicePort.ToString()}/Sensor/SensorData/{(int)measurementUnits}"));
 				task1.Wait();
 				var response = task1.Result;
 

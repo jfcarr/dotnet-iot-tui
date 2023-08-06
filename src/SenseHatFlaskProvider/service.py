@@ -27,16 +27,19 @@ def get_current_sensor_data(measurement_units):
         if measurement_units == 2:
             sensor_result.data.altitude = my_utils.meters_to_feet(
                 sensor_result.data.altitude)
+        sensor_result.data.altitude = int(sensor_result.data.altitude)
         sensor_result.data.altitudeUnits = "feet" if measurement_units == 2 else "meters"
         sensor_result.data.formattedAltitude = f"{sensor_result.data.altitude} {sensor_result.data.altitudeUnits}"
 
         sensor_result.data.humidity = sense.get_humidity()
+        sensor_result.data.humidity = int(sensor_result.data.humidity)
         sensor_result.data.formattedHumidity = f"{sensor_result.data.humidity} %"
 
         sensor_result.data.temperature = sense.get_temperature()
         if measurement_units == 2:
             sensor_result.data.temperature = my_utils.celsius_to_fahrenheit(
                 sensor_result.data.temperature)
+        sensor_result.data.temperature = int(sensor_result.data.temperature)
         sensor_result.data.temperatureUnits = "fahrenheit" if measurement_units == 2 else "celsius"
         sensor_result.data.formattedTemperature = f"{sensor_result.data.temperature} {sensor_result.data.temperatureUnits}"
 
