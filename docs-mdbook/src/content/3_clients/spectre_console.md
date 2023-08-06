@@ -12,6 +12,8 @@ Spectre.Console applications do not follow the "desktop application" paradigm.  
 
 ## Create the Project
 
+<https://github.com/jfcarr/dotnet-iot-tui/tree/main/src/SpectreClient>
+
 1. Create the project, using `console` as the project type.
 1. Add package references:
    1. Spectre.Console.Cli (_adds nice command line argument handling_)

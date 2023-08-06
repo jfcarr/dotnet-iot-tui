@@ -1,4 +1,4 @@
-# .NET SDK
+# .NET SDK - Raspberry Pi
 
 Download and install the .NET 7 SDK for 64-bit ARM devices, located [here](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
 

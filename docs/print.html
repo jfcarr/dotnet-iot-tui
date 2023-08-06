@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="content/intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Internet of Things</li><li class="chapter-item expanded "><a href="content/1_iot/what_is_iot.html"><strong aria-hidden="true">1.</strong> What is IoT?</a></li><li class="chapter-item expanded affix "><li class="part-title">Raspberry Pi Setup</li><li class="chapter-item expanded "><a href="content/1_iot/configure_pi_and_hat.html"><strong aria-hidden="true">2.</strong> Configure Raspberry Pi and Sense HAT</a></li><li class="chapter-item expanded "><a href="content/1_iot/dotnet_sdk.html"><strong aria-hidden="true">3.</strong> .NET SDK</a></li><li class="chapter-item expanded affix "><li class="part-title">Services</li><li class="chapter-item expanded "><a href="content/2_services/dotnet_webapi.html"><strong aria-hidden="true">4.</strong> .NET WebApi</a></li><li class="chapter-item expanded "><a href="content/2_services/dotnet_grpc.html"><strong aria-hidden="true">5.</strong> .NET gRPC</a></li><li class="chapter-item expanded affix "><li class="part-title">Clients</li><li class="chapter-item expanded "><a href="content/3_clients/dotnet_console.html"><strong aria-hidden="true">6.</strong> .NET Console</a></li><li class="chapter-item expanded "><a href="content/3_clients/blazor_server_app.html"><strong aria-hidden="true">7.</strong> Blazor Server Application</a></li><li class="chapter-item expanded "><a href="content/3_clients/terminal_gui.html"><strong aria-hidden="true">8.</strong> Terminal.GUI</a></li><li class="chapter-item expanded "><a href="content/3_clients/spectre_console.html"><strong aria-hidden="true">9.</strong> Spectre.Console</a></li><li class="chapter-item expanded affix "><li class="part-title">Alternate Service</li><li class="chapter-item expanded "><a href="content/4_alternate_service/python_flask.html"><strong aria-hidden="true">10.</strong> Python / Flask</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="content/intro.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Internet of Things</li><li class="chapter-item expanded "><a href="content/1_iot/what_is_iot.html"><strong aria-hidden="true">1.</strong> What is IoT?</a></li><li class="chapter-item expanded affix "><li class="part-title">Raspberry Pi Setup</li><li class="chapter-item expanded "><a href="content/1_iot/configure_pi_and_hat.html"><strong aria-hidden="true">2.</strong> Configure Raspberry Pi and Sense HAT</a></li><li class="chapter-item expanded "><a href="content/1_iot/dotnet_sdk.html"><strong aria-hidden="true">3.</strong> .NET SDK - Raspberry Pi</a></li><li class="chapter-item expanded affix "><li class="part-title">Services</li><li class="chapter-item expanded "><a href="content/2_services/dotnet_webapi.html"><strong aria-hidden="true">4.</strong> .NET WebApi</a></li><li class="chapter-item expanded "><a href="content/2_services/dotnet_grpc.html"><strong aria-hidden="true">5.</strong> .NET gRPC</a></li><li class="chapter-item expanded affix "><li class="part-title">Clients</li><li class="chapter-item expanded "><a href="content/3_clients/dotnet_console.html"><strong aria-hidden="true">6.</strong> .NET Console</a></li><li class="chapter-item expanded "><a href="content/3_clients/blazor_server_app.html"><strong aria-hidden="true">7.</strong> Blazor Server Application</a></li><li class="chapter-item expanded "><a href="content/3_clients/terminal_gui.html"><strong aria-hidden="true">8.</strong> Terminal.GUI</a></li><li class="chapter-item expanded "><a href="content/3_clients/spectre_console.html"><strong aria-hidden="true">9.</strong> Spectre.Console</a></li><li class="chapter-item expanded affix "><li class="part-title">Alternate Service</li><li class="chapter-item expanded "><a href="content/4_alternate_service/python_flask.html"><strong aria-hidden="true">10.</strong> Python / Flask</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -204,12 +204,12 @@
 </blockquote>
 <p>Obtain a Raspberry Pi.  I'm using a <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">Raspberry Pi 4</a>.</p>
 <p>Install the 64-bit version of <a href="https://www.raspberrypi.com/software/">Raspberry Pi OS</a>.</p>
-<p>Using the raspi-config application, enable the following services:</p>
+<p>Using the <code>raspi-config</code> application, enable the following services:</p>
 <ul>
-<li>SSH - Allows remote access to the Raspberry Pi via Secure Shell.</li>
-<li>I2C - Enables the serial communication bus, allowing communication with attached devices and sensors.</li>
+<li><strong>SSH</strong> - Allows remote access to the Raspberry Pi via Secure Shell.</li>
+<li><strong>I2C</strong> - Enables the serial communication bus, allowing communication with attached devices and sensors.</li>
 </ul>
-<p>Obtain a <a href="https://www.raspberrypi.com/products/sense-hat/">Sense HAT</a>.  The Raspberry Pi Sense HAT (Hardware Attached on Top) is an add-on board for Raspberry Pi. The Sense HAT is equipped with an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors:</p>
+<p>Obtain a <a href="https://www.raspberrypi.com/products/sense-hat/">Sense HAT</a>.  The Raspberry Pi Sense HAT (<em>Hardware Attached on Top</em>) is an add-on board for Raspberry Pi. The Sense HAT is equipped with an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors:</p>
 <ul>
 <li>Gyroscope</li>
 <li>Accelerometer</li>
@@ -219,7 +219,7 @@
 <li>Humidity</li>
 </ul>
 <p>The Sense HAT can be installed directly on top of the Raspberry Pi.  Keep in mind, however, that the ambient heat from the Raspberry Pi will influence the readings from the temperature sensor.  If you want more accurate readings, you should use a <a href="https://www.adafruit.com/product/4823">compatible ribbon cable</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="net-sdk"><a class="header" href="#net-sdk">.NET SDK</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="net-sdk---raspberry-pi"><a class="header" href="#net-sdk---raspberry-pi">.NET SDK - Raspberry Pi</a></h1>
 <p>Download and install the .NET 7 SDK for 64-bit ARM devices, located <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">here</a>.</p>
 <p><img src="content/1_iot/../../img/dotnet_sdk_arm64.jpg" alt="Image" /></p>
 <blockquote>
@@ -372,6 +372,7 @@
 <p>Using Terminal.Gui, you can create applications that look more like traditional desktop apps than you can with Spectre.Console.  But, Terminal.Gui has a critical dependency that introduces a limitation: It requires a graphical stack for rendering.  Usually, this is fine: You'll be running your Terminal.Gui applications from a command prompt in Windows, or in a terminal from your Linux desktop.  But, for something like a Linux server that boots to a CLI, your Terminal.Gui applications <em>will not run</em> because there's no graphical stack.</p>
 <p>Spectre.Console applications do not follow the &quot;desktop application&quot; paradigm.  They are closer to console applications, but with enhanced colors, and rendering of other things like tables, but in a scrolling view.  Most importantly, though, Spectre.Console applications do <em>not</em> require a graphical environment.  So, for a purely text-based environment, Spectre.Console fills this need.</p>
 <h2 id="create-the-project-2"><a class="header" href="#create-the-project-2">Create the Project</a></h2>
+<p><a href="https://github.com/jfcarr/dotnet-iot-tui/tree/main/src/SpectreClient">https://github.com/jfcarr/dotnet-iot-tui/tree/main/src/SpectreClient</a></p>
 <ol>
 <li>Create the project, using <code>console</code> as the project type.</li>
 <li>Add package references:

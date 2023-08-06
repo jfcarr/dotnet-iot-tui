@@ -7,7 +7,7 @@
 # Raspberry Pi Setup
 
 - [Configure Raspberry Pi and Sense HAT](content/1_iot/configure_pi_and_hat.md)
-- [.NET SDK](content/1_iot/dotnet_sdk.md)
+- [.NET SDK - Raspberry Pi](content/1_iot/dotnet_sdk.md)
 
 # Services
 

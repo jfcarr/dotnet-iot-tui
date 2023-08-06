@@ -6,12 +6,12 @@ Obtain a Raspberry Pi.  I'm using a [Raspberry Pi 4](https://www.raspberrypi.com
 
 Install the 64-bit version of [Raspberry Pi OS](https://www.raspberrypi.com/software/).
 
-Using the raspi-config application, enable the following services:
+Using the `raspi-config` application, enable the following services:
 
-* SSH - Allows remote access to the Raspberry Pi via Secure Shell.
-* I2C - Enables the serial communication bus, allowing communication with attached devices and sensors.
+* **SSH** - Allows remote access to the Raspberry Pi via Secure Shell.
+* **I2C** - Enables the serial communication bus, allowing communication with attached devices and sensors.
 
-Obtain a [Sense HAT](https://www.raspberrypi.com/products/sense-hat/).  The Raspberry Pi Sense HAT (Hardware Attached on Top) is an add-on board for Raspberry Pi. The Sense HAT is equipped with an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors:
+Obtain a [Sense HAT](https://www.raspberrypi.com/products/sense-hat/).  The Raspberry Pi Sense HAT (_Hardware Attached on Top_) is an add-on board for Raspberry Pi. The Sense HAT is equipped with an 8×8 RGB LED matrix, a five-button joystick, and includes the following sensors:
 
 * Gyroscope
 * Accelerometer
