@@ -10,6 +10,12 @@ REST_SERVICE = SenseHatProvider
 GRPC_SERVICE = SenseHatGrpcProvider
 FLASK_SERVICE = SenseHatFlaskProvider
 SHARED_LIB = SenseHatLib
+RID = linux-x64
+BLAZOR_CLIENT = BlazorClient
+CONSOLE_CLIENT = ConsoleClient
+GRPC_CLIENT = SenseHatGrpcClient
+SPECTRE_CLIENT = SpectreClient
+TERMINAL_GUI_CLIENT = TerminalGuiClient
 TARGET = services
 VNC_COMMAND = vncserver-virtual
 
@@ -17,6 +23,7 @@ default:
 	@echo 'Copy to, and access, the Raspberry Pi:'
 	@echo '  copy-pi    -- Bundle the service projects into a .zip file, and copy them to the Raspberry Pi.'
 	@echo '  shell-pi   -- Use SSH to open a remote shell on the Raspberry Pi.'
+	@echo '  publish    -- Publish standalone binaries for client applications.'
 	@echo ''
 	@echo 'Pi commands (to be run directly on the Raspberry Pi server):'
 	@echo '  deploy     -- Extract the project bundle.'
@@ -34,6 +41,13 @@ copy-pi:
 
 shell-pi:
 	ssh $(PI_USER)@$(PI_SERVER)
+
+publish:
+	dotnet publish ./$(BLAZOR_CLIENT)/$(BLAZOR_CLIENT).csproj -c Release -r $(RID) --self-contained true /p:PublishSingleFile=true
+	dotnet publish ./$(CONSOLE_CLIENT)/$(CONSOLE_CLIENT).csproj -c Release -r $(RID) --self-contained true /p:PublishSingleFile=true
+	dotnet publish ./$(GRPC_CLIENT)/$(GRPC_CLIENT).csproj -c Release -r $(RID) --self-contained true /p:PublishSingleFile=true
+	dotnet publish ./$(SPECTRE_CLIENT)/$(SPECTRE_CLIENT).csproj -c Release -r $(RID) --self-contained true /p:PublishSingleFile=true
+	dotnet publish ./$(TERMINAL_GUI_CLIENT)/$(TERMINAL_GUI_CLIENT).csproj -c Release -r $(RID) --self-contained true /p:PublishSingleFile=true
 
 deploy:
 	mkdir -p $(TARGET)
