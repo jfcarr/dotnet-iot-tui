@@ -5,16 +5,6 @@ import json
 app = Flask(__name__)
 
 
-@app.post("/sense/hello")
-def hello_msg_sense():
-    sense = SenseHat()
-
-    sense.set_rotation(180)
-    sense.show_message("Hello world!")
-
-    return "Success!"
-
-
 @app.get("/Sensor/SensorData/<int:measurement_units>")
 def get_current_sensor_data(measurement_units):
 
