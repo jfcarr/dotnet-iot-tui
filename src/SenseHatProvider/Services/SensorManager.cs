@@ -3,6 +3,7 @@ using Iot.Device.Common;
 using Iot.Device.SenseHat;
 using SenseHatLib.Helpers;
 using SenseHatLib.Models;
+using UnitsNet.Units;
 
 namespace SenseHatProvider.Services
 {
@@ -42,6 +43,8 @@ namespace SenseHatProvider.Services
 					if (measurementUnits == MeasurementUnits.Imperial)
 						sensorResult.Data.Altitude = sensorResult.Data.Altitude.MetersToFeet();
 					sensorResult.Data.AltitudeUnits = (measurementUnits == MeasurementUnits.Imperial) ? "feet" : "meters";
+
+					sensorResult.Data.BarometricPressure = Math.Round(Convert.ToDouble(sh.Pressure * 0.0295300), 2); // converts from millibars to inHg
 
 					sensorResult.Data.Temperature = Convert.ToInt32(sh.Temperature);
 					if (measurementUnits == MeasurementUnits.Imperial)

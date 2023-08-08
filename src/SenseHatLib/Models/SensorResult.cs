@@ -30,6 +30,15 @@ namespace SenseHatLib.Models
 			}
 		}
 
+		public double BarometricPressure { get; set; }
+		public string FormattedBarometricPressure
+		{
+			get
+			{
+				return $"{BarometricPressure} inHg";
+			}
+		}
+
 		public int Humidity { get; set; }
 		public string FormattedHumidity
 		{

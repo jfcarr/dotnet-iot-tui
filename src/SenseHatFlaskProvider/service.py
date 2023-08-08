@@ -21,6 +21,11 @@ def get_current_sensor_data(measurement_units):
         sensor_result.data.altitudeUnits = "feet" if measurement_units == 2 else "meters"
         sensor_result.data.formattedAltitude = f"{sensor_result.data.altitude} {sensor_result.data.altitudeUnits}"
 
+        sensor_result.data.barometricPressure = sense.get_pressure()
+        sensor_result.data.barometricPressure = round(
+            sensor_result.data.barometricPressure * 0.0295300, 2)
+        sensor_result.data.formattedBarometricPressure = f"{sensor_result.data.barometricPressure} inHg"
+
         sensor_result.data.humidity = sense.get_humidity()
         sensor_result.data.humidity = int(sensor_result.data.humidity)
         sensor_result.data.formattedHumidity = f"{sensor_result.data.humidity} %"
@@ -98,6 +103,8 @@ class SensorData:
         self.altitude = 0
         self.altitudeUnits = ""
         self.formattedAltitude = ""
+        self.barometricPressure = 0
+        self.formattedBarometricPressure = ""
         self.humidity = 0
         self.formattedHumidity = ""
         self.temperature = 0
